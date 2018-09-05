@@ -244,8 +244,10 @@ export default class VirtualList extends React.PureComponent<Props, State> {
 
   scrollTo(value: number) {
     const {scrollDirection = DIRECTION.VERTICAL} = this.props;
-
-    this.rootNode[scrollProp[scrollDirection]] = value;
+    let scrollProps = {};
+    scrollProps[positionProp[scrollDirection]] = value;
+    scrollProps = {...scrollProps, behavior: 'smooth'};
+    this.rootNode.scroll(scrollProps);
   }
 
   getOffsetForIndex(
